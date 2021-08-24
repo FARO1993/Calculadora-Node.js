@@ -27,24 +27,16 @@ function parsearTerminos(texto) {
 }
 
 function ejecutarOperacion(objOperacion) {
-  return objOperacion.operacion == "+"
-    ? operaciones.sumar(objOperacion.primerTermino, objOperacion.segundoTermino)
-    : objOperacion.operacion == "-"
-    ? operaciones.restar(
-        objOperacion.primerTermino,
-        objOperacion.segundoTermino
-      )
-    : objOperacion.operacion == "*"
-    ? operaciones.multiplicar(
-        objOperacion.primerTermino,
-        objOperacion.segundoTermino
-      )
-    : objOperacion.operacion == "/"
-    ? operaciones.dividir(
-        objOperacion.primerTermino,
-        objOperacion.segundoTermino
-      )
-    : "No hay operación para realizar";
+  const map = {
+    "+": operaciones.sumar,
+    "-": operaciones.restar,
+    "*": operaciones.multiplicar,
+    "/": operaciones.dividir,
+  };
+
+  const simbol = objOperacion.operacion;
+  const ejecutor = map[simbol];
+  return ejecutor(objOperacion.primerTermino, objOperacion.segundoTermino);
 }
 
 function main() {
